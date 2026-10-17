@@ -308,15 +308,12 @@
   .span-3{grid-column:span 3}.span-4{grid-column:span 4}.span-5{grid-column:span 5}.span-12{grid-column:span 12}
   @media(max-width:860px){.span-3,.span-4,.span-5{grid-column:span 6}}
   @media(max-width:560px){.span-3,.span-4,.span-5{grid-column:span 12}}
-  .skill{display:grid;gap:7px}
-  .skill .row{display:flex;justify-content:space-between;gap:10px;font-size:14px}
-  .skill .lvl{font-family:var(--f-mono);font-size:11px;color:var(--muted);white-space:nowrap}
-  .skill .bar{height:6px;border-radius:3px;background:var(--surface-2);overflow:hidden}
-  .skill .bar i{display:block;height:100%;background:var(--accent);border-radius:3px;width:0;transition:width 1s cubic-bezier(.2,.7,.2,1) .15s}
-  .skill .bar.sig i{background:var(--signal)}
-  .in .skill .bar i{width:var(--w)}
-  .trio{grid-template-columns:repeat(3,1fr);gap:22px}
-  @media(max-width:760px){.trio{grid-template-columns:1fr}}
+  .skillcard{gap:14px}
+  .skhead{display:flex;align-items:center;gap:12px}
+  .skhead .ico{width:38px;height:38px;flex:none;border-radius:11px;background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center}
+  .skhead .ico svg{width:19px;height:19px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .skillcard h3{font-size:16px}
+  .skillcard .tag{font-size:12.5px;padding:6px 11px}
 
   /* ============================ Contact / footer ============================ */
   .contact{padding:clamp(64px,9vw,104px) 0 40px;border-top:1px solid var(--line)}
@@ -342,7 +339,6 @@
     *{transition:none!important;animation:none!important}
     .reveal,.rise,.tl .dot,.tl-card,.tl-card li{opacity:1!important;transform:none!important}
     .tl .dot::after{display:none}
-    .skill .bar i{width:var(--w)}
   }
 </style>
 </head>
@@ -595,43 +591,32 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">03 — Skills</span>
-      <h2 id="skills-h">Technical skills</h2>
-      <p>Grouped by area. The bars indicate relative depth of day-to-day experience.</p>
+      <h2 id="skills-h">Technical Skills</h2>
     </div>
     <div class="skills">
-      <div class="card span-5 reveal">
-        <div class="eyebrow">C++ &amp; software design</div>
-        <div class="skill"><div class="row"><span>Modern C++ / C</span><span class="lvl">4 yrs daily</span></div><div class="bar"><i style="--w:94%"></i></div></div>
-        <div class="skill"><div class="row"><span>OO design &amp; design patterns</span><span class="lvl">owner-level</span></div><div class="bar"><i style="--w:86%"></i></div></div>
-        <div class="skill"><div class="row"><span>Refactoring &amp; code review</span><span class="lvl">mentors juniors</span></div><div class="bar"><i style="--w:82%"></i></div></div>
+      <div class="card skillcard span-4 reveal">
+        <div class="skhead"><span class="ico"><svg viewBox="0 0 24 24"><path d="M8 4l-6 8 6 8M16 4l6 8-6 8M14 3l-4 18"/></svg></span><h3>C++ &amp; Software Design</h3></div>
+        <div class="tags"><span class="tag on">Modern C++</span><span class="tag on">C</span><span class="tag">Object-oriented design</span><span class="tag">Design patterns</span><span class="tag">Refactoring</span><span class="tag">Code review</span></div>
       </div>
-      <div class="card span-4 reveal">
-        <div class="eyebrow">Performance</div>
-        <div class="skill"><div class="row"><span>POSIX multithreading, sync</span><span class="lvl">prototypes shipped</span></div><div class="bar"><i style="--w:84%"></i></div></div>
-        <div class="skill"><div class="row"><span>GPU / CUDA</span><span class="lvl">one prototype</span></div><div class="bar sig"><i style="--w:60%"></i></div></div>
-        <div class="skill"><div class="row"><span>Profiling &amp; optimization</span><span class="lvl">QuestaSim</span></div><div class="bar"><i style="--w:80%"></i></div></div>
+      <div class="card skillcard span-4 reveal">
+        <div class="skhead"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="1.6"/><circle cx="14" cy="12" r="1.6"/><circle cx="10" cy="18" r="1.6"/></svg></span><h3>Performance &amp; Concurrency</h3></div>
+        <div class="tags"><span class="tag on">POSIX multithreading</span><span class="tag on">CUDA</span><span class="tag">Concurrency</span><span class="tag">Synchronization</span><span class="tag">Profiling</span><span class="tag">Optimization</span></div>
       </div>
-      <div class="card span-3 reveal">
-        <div class="eyebrow">EDA domain</div>
-        <div class="tags"><span class="tag on">Questa simulation</span><span class="tag">SystemVerilog</span><span class="tag">VHDL</span><span class="tag">Mixed-language</span><span class="tag">Elaboration</span></div>
+      <div class="card skillcard span-4 reveal">
+        <div class="skhead"><span class="ico"><svg viewBox="0 0 24 24"><path d="M3 15h4v-7h3v7h3v-5h3v5h3V8h2"/></svg></span><h3>EDA Domain</h3></div>
+        <div class="tags"><span class="tag on">Questa simulation</span><span class="tag">SystemVerilog</span><span class="tag">VHDL</span><span class="tag">Mixed-language designs</span></div>
       </div>
-      <div class="card span-4 reveal">
-        <div class="eyebrow">Tools &amp; platforms</div>
-        <div class="tags"><span class="tag">Linux x86-64 · ARM</span><span class="tag">Git</span><span class="tag">Perforce</span><span class="tag">Make</span><span class="tag">Jenkins CI/CD</span><span class="tag">Coverity</span><span class="tag">Jira · Confluence</span></div>
+      <div class="card skillcard span-4 reveal">
+        <div class="skhead"><span class="ico"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></svg></span><h3>Tools &amp; Platforms</h3></div>
+        <div class="tags"><span class="tag on">Linux x86-64 · ARM</span><span class="tag">Git</span><span class="tag">Perforce</span><span class="tag">Make</span><span class="tag">Jenkins CI/CD</span><span class="tag">Coverity</span><span class="tag">Jira</span><span class="tag">Confluence</span></div>
       </div>
-      <div class="card span-4 reveal">
-        <div class="eyebrow">Scripting &amp; other languages</div>
+      <div class="card skillcard span-4 reveal">
+        <div class="skhead"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 17l6-6-6-6M12 19h8"/></svg></span><h3>Languages &amp; Scripting</h3></div>
         <div class="tags"><span class="tag on">Python</span><span class="tag on">Tcl</span><span class="tag">Shell</span><span class="tag">SQL</span><span class="tag">Java</span><span class="tag">C#</span></div>
       </div>
-      <div class="card span-4 reveal">
-        <div class="eyebrow">AI &amp; automation</div>
-        <div class="tags"><span class="tag">LLMs</span><span class="tag">AI agents</span><span class="tag">Generative AI tooling</span></div>
-        <p>Uses LLM-based tools and agents as part of day-to-day engineering work.</p>
-      </div>
-      <div class="card span-12 trio reveal">
-        <div><div class="eyebrow">Education</div><h3 style="margin-top:6px">B.Sc. Computer Engineering</h3><p>Ain Shams University, 2017 to 2022. GPA 3.8 / 4.0, Excellent, ranked 3rd in class.</p></div>
-        <div><div class="eyebrow">Leadership</div><h3 style="margin-top:6px">ACES · MECA · Egypt Career Summit</h3><p>Student-activity leadership roles, 2018 to 2020.</p></div>
-        <div><div class="eyebrow">Additional</div><h3 style="margin-top:6px">Languages and interests</h3><p>Arabic (native), English (fluent). Former professional basketball player, El-Shams Sporting Club, 2013 to 2017.</p></div>
+      <div class="card skillcard span-4 reveal">
+        <div class="skhead"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/><circle cx="12" cy="12" r="3.5"/></svg></span><h3>AI &amp; Automation</h3></div>
+        <div class="tags"><span class="tag">LLMs</span><span class="tag">AI agents</span><span class="tag">Generative AI tools</span></div>
       </div>
     </div>
   </div>
