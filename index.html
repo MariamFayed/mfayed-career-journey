@@ -266,21 +266,6 @@
   .pkey .k.run{background:var(--accent);border-color:var(--accent)}
   .pkey .k.done{background:color-mix(in srgb,var(--accent) 35%,var(--surface-2))}
   .pkey .k.sync{width:3px;border-radius:2px;background:var(--signal);border:0}
-  /* 03 GBE */
-  .gbe svg{width:100%;height:auto;display:block;overflow:visible}
-  .gbe .box{transform-box:fill-box;transform-origin:center;opacity:0;transform:scale(.96);transition:opacity .5s ease var(--d,0s),transform .5s ease var(--d,0s)}
-  .hl.in .gbe .box{opacity:1;transform:none}
-  .gbe rect{fill:var(--surface-2);stroke:var(--line-strong)}
-  .gbe .shared rect{stroke:var(--accent);stroke-width:1.5;fill:color-mix(in srgb,var(--accent) 10%,var(--surface-2))}
-  .gbe text{font-family:var(--f-mono);font-size:11px;fill:var(--ink)}
-  .gbe .lbl{fill:var(--muted);font-size:10px}
-  .gbe .edge{stroke:var(--line-strong);stroke-width:1.5;fill:none;stroke-dasharray:220;stroke-dashoffset:220;transition:stroke-dashoffset .8s ease var(--d,0s)}
-  .gbe .edge.x{stroke:var(--signal);stroke-width:2}
-  .hl.in .gbe .edge{stroke-dashoffset:0}
-  .gbe .xlbl{fill:var(--signal);font-size:10px}
-  .gains{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-  .gains span{font-family:var(--f-mono);font-size:11.5px;padding:5px 10px;border-radius:999px;border:1px solid var(--line-strong);color:var(--ink)}
-  .gains span b{color:var(--ok);font-weight:600}
   /* 04 SIMD onto GPU */
   .gpu2{display:grid;gap:10px}
   .grow{display:grid;grid-template-columns:132px 1fr;gap:12px;align-items:center}
@@ -343,8 +328,8 @@
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     *{transition:none!important;animation:none!important}
-    .reveal,.rise,.tl .dot,.tl-card,.tl-card li,.dp .node,.dp-out span,.gbe .box{opacity:1!important;transform:none!important}
-    .dp .edge,.gbe .edge{stroke-dashoffset:0!important}
+    .reveal,.rise,.tl .dot,.tl-card,.tl-card li,.dp .node,.dp-out span{opacity:1!important;transform:none!important}
+    .dp .edge{stroke-dashoffset:0!important}
     .tl .dot::after{display:none}
     .skill .bar i{width:var(--w)}
   }
@@ -467,7 +452,7 @@
     <div class="sec-head reveal">
       <span class="eyebrow">02 — Projects</span>
       <h2 id="projects-h">Selected projects</h2>
-      <p>Four pieces of work from Siemens EDA: a packaging framework shared across verification products, a simulation kernel built from scratch, elaboration performance in QuestaSim, and a GPU-based simulation prototype.</p>
+      <p>Three pieces of work from Siemens EDA: a packaging framework shared across verification products, a simulation kernel built from scratch, and a GPU-based simulation prototype.</p>
     </div>
 
     <div class="hl-list">
@@ -558,52 +543,10 @@
         </div>
       </article>
 
-      <!-- 03 QuestaSim GBE -->
-      <article class="hl" id="p-gbe">
-        <div class="story">
-          <span class="hl-num">Project 03 · QuestaSim, Siemens' HDL simulator</span>
-          <span class="badge"><i></i>Graph-based elaboration · Cross Variant Connectivity</span>
-          <h3>QuestaSim Graph-based Elaboration: faster, leaner elaboration of large designs</h3>
-          <p>Large SystemVerilog and VHDL designs instantiate the same module with many parameter variants. Graph-based elaboration shares what can be shared and connects what must be connected across those variants. Mariam owned the Cross Variant Connectivity area: <b>customer-requested features</b> from spec to release, plus performance work that <b>cut runtime and memory</b> and improved scaling on complex designs.</p>
-          <div class="pillrow">
-            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 15l4-6 4 3 4-7"/></svg></span><div><h4>Profiling-led</h4><span>Measure, find the hot path, fix, measure again.</span></div></div>
-            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 4h7v7H4zM13 13h7v7h-7zM11 7.5h2M16.5 11v2"/></svg></span><div><h4>Mixed language</h4><span>SystemVerilog and VHDL in the same graph.</span></div></div>
-            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><div><h4>Shipped to customers</h4><span>Requirements, spec, implementation, release.</span></div></div>
-          </div>
-          <div class="tags"><span class="tag on">C++</span><span class="tag">Profiling</span><span class="tag">SystemVerilog · VHDL</span><span class="tag">Coverity</span><span class="tag">Perforce</span></div>
-        </div>
-        <div class="fig gbe">
-          <div class="fig-top"><span class="dots"><i></i><i></i><i></i></span><span class="ttl">elaboration graph · variants</span><span class="live"><i></i>shared</span></div>
-          <div class="fig-body">
-            <svg viewBox="0 0 520 250" aria-hidden="true">
-              <text class="lbl" x="20" y="22">source</text><text class="lbl" x="200" y="22">instances</text><text class="lbl" x="400" y="22">elaborated graph</text>
-              <g class="box" style="--d:.1s"><rect x="16" y="100" width="120" height="44" rx="6"/><text x="30" y="119">module fifo</text><text class="lbl" x="30" y="135">#(parameter W)</text></g>
-              <path class="edge" style="--d:.4s" d="M136 122 C 170 122, 170 52, 200 52"/>
-              <path class="edge" style="--d:.5s" d="M136 122 H 200"/>
-              <path class="edge" style="--d:.6s" d="M136 122 C 170 122, 170 192, 200 192"/>
-              <g class="box" style="--d:.7s"><rect x="200" y="36" width="110" height="32" rx="6"/><text x="212" y="56">u0: fifo#(8)</text></g>
-              <g class="box" style="--d:.8s"><rect x="200" y="106" width="110" height="32" rx="6"/><text x="212" y="126">u1: fifo#(16)</text></g>
-              <g class="box" style="--d:.9s"><rect x="200" y="176" width="110" height="32" rx="6"/><text x="212" y="196">u2: fifo#(8)</text></g>
-              <path class="edge" style="--d:1.2s" d="M310 52 C 350 52, 350 76, 400 76"/>
-              <path class="edge" style="--d:1.3s" d="M310 192 C 350 192, 350 76, 400 76"/>
-              <path class="edge" style="--d:1.4s" d="M310 122 C 350 122, 350 156, 400 156"/>
-              <g class="box shared" style="--d:1.6s"><rect x="400" y="60" width="104" height="32" rx="6"/><text x="412" y="80">fifo&lt;W=8&gt;</text></g>
-              <g class="box" style="--d:1.7s"><rect x="400" y="140" width="104" height="32" rx="6"/><text x="412" y="160">fifo&lt;W=16&gt;</text></g>
-              <path class="edge x" style="--d:2s" d="M255 138 C 255 160, 255 160, 255 176"/>
-              <g class="box" style="--d:2.2s"><text class="xlbl" x="262" y="162">u1.out → u2.in</text></g>
-              <g class="box" style="--d:2.3s"><text class="lbl" x="400" y="110">shared by u0 + u2</text></g>
-              <g class="box" style="--d:2.4s"><text class="xlbl" x="262" y="236">cross-variant connection, W=16 to W=8</text></g>
-            </svg>
-            <div class="gains"><span>runtime <b>↓</b></span><span>memory <b>↓</b></span><span>scales on complex designs <b>✓</b></span></div>
-            <div class="fig-leg">Same-variant instances resolve to <b>one elaborated node</b>; connections across different variants are what Cross Variant Connectivity handles.</div>
-          </div>
-        </div>
-      </article>
-
-      <!-- 04 GPU prototype -->
+      <!-- 03 GPU prototype -->
       <article class="hl" id="p-gpu">
         <div class="story">
-          <span class="hl-num">Project 04 · QuestaSim parallel simulation initiative</span>
+          <span class="hl-num">Project 03 · QuestaSim parallel simulation initiative</span>
           <span class="badge"><i></i>CUDA · performance prototype</span>
           <h3>GPU-accelerated simulation prototype</h3>
           <p>In large designs, one time slot can hold <b>thousands to millions of processes executing the same function</b> on different data. That shape maps directly onto GPU threads.</p>
@@ -661,7 +604,7 @@
         <div class="eyebrow">Performance</div>
         <div class="skill"><div class="row"><span>POSIX multithreading, sync</span><span class="lvl">prototypes shipped</span></div><div class="bar"><i style="--w:84%"></i></div></div>
         <div class="skill"><div class="row"><span>GPU / CUDA</span><span class="lvl">one prototype</span></div><div class="bar sig"><i style="--w:60%"></i></div></div>
-        <div class="skill"><div class="row"><span>Profiling &amp; optimization</span><span class="lvl">GBE work</span></div><div class="bar"><i style="--w:80%"></i></div></div>
+        <div class="skill"><div class="row"><span>Profiling &amp; optimization</span><span class="lvl">QuestaSim</span></div><div class="bar"><i style="--w:80%"></i></div></div>
       </div>
       <div class="card span-3 reveal">
         <div class="eyebrow">EDA domain</div>
