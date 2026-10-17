@@ -223,28 +223,35 @@
   .fig-body{padding:16px 18px 18px}
   .fig-leg{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);line-height:1.5;margin-top:12px}
   .fig-leg b{color:var(--accent);font-weight:600}
-  /* 01 design packager: horizontal tool view */
+  /* 01 design packager: tools in, one output out */
   .dpv svg{width:100%;height:auto;display:block;overflow:visible}
   .dpv text{font-family:var(--f-mono);font-size:11px;fill:var(--ink)}
-  .dpv .lbl{fill:var(--muted);font-size:10px}
+  .dpv .lbl{fill:var(--muted);font-size:9.5px}
   .dpv .tool rect{fill:var(--surface-2);stroke:var(--line-strong);transition:fill .3s,stroke .3s}
-  .dpv .tool.on rect{stroke:var(--accent);stroke-width:1.5;fill:color-mix(in srgb,var(--accent) 12%,var(--surface-2))}
+  .dpv .tool .tt{font-weight:500}
+  .dpv .tool .tl{fill:var(--muted);font-size:8.8px}
+  .dpv .tool.on > rect{stroke:var(--accent);stroke-width:1.5;fill:color-mix(in srgb,var(--accent) 12%,var(--surface-2))}
   .dpv .xml rect{fill:var(--surface);stroke:var(--line-strong);stroke-dasharray:3 2;transition:fill .3s,stroke .3s}
   .dpv .xml text{font-size:9.5px;fill:var(--muted)}
-  .dpv .xml.on rect{stroke:var(--signal);stroke-dasharray:none;fill:color-mix(in srgb,var(--signal) 16%,var(--surface))}
-  .dpv .xml.on text{fill:var(--ink)}
+  .dpv .tool.on .xml rect{stroke:var(--signal);stroke-dasharray:none;fill:color-mix(in srgb,var(--signal) 16%,var(--surface))}
+  .dpv .tool.on .xml text{fill:var(--ink)}
   .dpv .link{stroke:var(--line-strong);stroke-width:1.5;fill:none;transition:stroke .3s}
   .dpv .link.on{stroke:var(--signal);stroke-width:2}
-  .dpv .bar rect{fill:var(--surface-2);stroke:var(--accent);stroke-width:1.5}
-  .dpv .bart{font-family:var(--f-display);font-size:14px;font-weight:700;fill:var(--ink)}
-  .dpv .seg rect{fill:var(--surface);stroke:var(--line);transition:fill .3s,stroke .3s}
+  .dpv .flow{stroke:var(--line-strong);stroke-width:1.5;fill:none;transition:stroke .3s}
+  .dpv .flow.on{stroke:var(--accent);stroke-width:2}
+  .dpv .bar rect{fill:color-mix(in srgb,var(--surface-2) 55%,var(--surface));stroke:var(--accent);stroke-width:1.5}
+  .dpv .bart{font-family:var(--f-display);font-size:13px;font-weight:700;fill:var(--ink)}
+  .dpv .seg rect{fill:var(--surface);stroke:var(--line-strong);transition:fill .3s,stroke .3s}
   .dpv .seg text{fill:var(--muted);font-size:10.5px}
   .dpv .seg.on rect{fill:var(--accent);stroke:var(--accent)}
   .dpv .seg.on text{fill:var(--on-accent)}
-  .dpv .seg.done rect{fill:color-mix(in srgb,var(--accent) 30%,var(--surface));stroke:color-mix(in srgb,var(--accent) 40%,var(--line))}
+  .dpv .seg.done rect{fill:color-mix(in srgb,var(--accent) 28%,var(--surface));stroke:color-mix(in srgb,var(--accent) 45%,var(--line))}
+  .dpv .seg.done text{fill:var(--ink)}
   .dpv .pkg rect{fill:var(--surface);stroke:var(--line-strong);transition:fill .3s,stroke .3s}
+  .dpv .pkg text{font-size:10.5px}
+  .dpv .pkg .lbl{font-size:8.8px}
   .dpv .pkg.on rect{fill:color-mix(in srgb,var(--accent) 14%,var(--surface));stroke:var(--accent);stroke-width:1.5}
-  .dpv .dot{fill:var(--signal);opacity:0;transition:cx .9s ease,cy .9s ease,opacity .25s}
+  .dpv .dot{fill:var(--signal);opacity:0;transition:cx .8s ease,cy .8s ease,opacity .25s}
   .dpv .dot.on{opacity:1}
   /* 02 sequential vs parallel */
   .psim{display:grid;gap:14px}
@@ -466,44 +473,39 @@
           <span class="hl-num">Project 01 · Siemens EDA</span>
           <span class="badge"><i></i>Technical owner · 2022 to present</span>
           <h3>Design Packager: reproducible packaging of verification runs</h3>
-          <p>One <b>horizontal packaging tool</b> for every verification product. A tool plugs in through a single <b>XML file</b> describing its commands; parsing, processing and packaging stay inside the packager; the output is one <b>reproducible package</b>.</p>
-          <div class="pillrow">
-            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg></span><div><h4>Horizontal</h4><span>One packager, every product line.</span></div></div>
-            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM8 9h8M8 13h8M8 17h5"/></svg></span><div><h4>XML contract</h4><span>Each tool describes its commands once.</span></div></div>
-            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5"/></svg></span><div><h4>Shared core</h4><span>Parse, process, package: a black box to tools.</span></div></div>
-          </div>
-          <div class="tags"><span class="tag on">C++</span><span class="tag on">XML interface</span><span class="tag">Strategy · Factory · Registry</span><span class="tag">ARM · x86-64</span></div>
+          <ul class="brief">
+            <li><b>Contract:</b> each tool hands the packager its <b>command XML files</b>. Nothing else.</li>
+            <li><b>Packager:</b> extract commands → parse commands → parse files, <b>recursively</b> following includes.</li>
+            <li><b>Output:</b> one <b>design output directory</b> with every collected file, ready to reproduce the run.</li>
+          </ul>
+          <div class="tags"><span class="tag on">C++</span><span class="tag on">XML interface</span><span class="tag">ARM · x86-64</span></div>
         </div>
         <div class="fig dpv">
-          <div class="fig-top"><span class="dots"><i></i><i></i><i></i></span><span class="ttl">design packager · one tool, every product</span><span class="live"><i></i>packaging</span></div>
+          <div class="fig-top"><span class="dots"><i></i><i></i><i></i></span><span class="ttl">design packager · tools in, one output</span><span class="live"><i></i>packaging</span></div>
           <div class="fig-body">
-            <svg viewBox="0 0 520 300" aria-hidden="true" id="dpSvg">
-              <text class="lbl" x="20" y="20">verification products</text>
-              <g class="tool" data-i="0"><rect x="20" y="30" width="105" height="34" rx="7"/><text x="72" y="52" text-anchor="middle">Simulation</text></g>
-              <g class="tool" data-i="1"><rect x="145" y="30" width="105" height="34" rx="7"/><text x="197" y="52" text-anchor="middle">Emulation</text></g>
-              <g class="tool" data-i="2"><rect x="270" y="30" width="105" height="34" rx="7"/><text x="322" y="52" text-anchor="middle">Formal</text></g>
-              <g class="tool" data-i="3"><rect x="395" y="30" width="105" height="34" rx="7"/><text x="447" y="52" text-anchor="middle">Debug</text></g>
-              <g class="xml" data-i="0"><rect x="44" y="76" width="56" height="20" rx="10"/><text x="72" y="90" text-anchor="middle">sim.xml</text></g>
-              <g class="xml" data-i="1"><rect x="169" y="76" width="56" height="20" rx="10"/><text x="197" y="90" text-anchor="middle">emu.xml</text></g>
-              <g class="xml" data-i="2"><rect x="294" y="76" width="56" height="20" rx="10"/><text x="322" y="90" text-anchor="middle">fv.xml</text></g>
-              <g class="xml" data-i="3"><rect x="419" y="76" width="56" height="20" rx="10"/><text x="447" y="90" text-anchor="middle">dbg.xml</text></g>
-              <path class="link" data-i="0" d="M72 96 V 150"/>
-              <path class="link" data-i="1" d="M197 96 V 150"/>
-              <path class="link" data-i="2" d="M322 96 V 150"/>
-              <path class="link" data-i="3" d="M447 96 V 150"/>
-              
-              <g class="bar"><rect x="20" y="150" width="480" height="50" rx="10"/><text class="bart" x="34" y="181">Design Packager</text>
-                <g class="seg" data-s="0"><rect x="230" y="160" width="80" height="30" rx="6"/><text x="270" y="180" text-anchor="middle">parse</text></g>
-                <g class="seg" data-s="1"><rect x="318" y="160" width="80" height="30" rx="6"/><text x="358" y="180" text-anchor="middle">process</text></g>
-                <g class="seg" data-s="2"><rect x="406" y="160" width="84" height="30" rx="6"/><text x="448" y="180" text-anchor="middle">package</text></g>
-              </g>
-              <path class="link out" d="M260 200 V 236"/>
-              <text class="lbl" x="20" y="224">contract: one XML file per tool</text>
-              <g class="pkg"><rect x="170" y="236" width="180" height="36" rx="8"/><text x="260" y="259" text-anchor="middle">design_pkg.tar.gz</text></g>
-              <text class="lbl" x="362" y="259">reproducible anywhere</text>
-              <circle class="dot" id="dpDot" cx="72" cy="96" r="5"/>
+            <svg viewBox="0 0 530 330" aria-hidden="true" id="dpSvg">
+              <g class="tool" data-i="0"><rect x="16" y="28" width="112" height="84" rx="8"/><text class="tt" x="72" y="46" text-anchor="middle">Questa</text><text class="tl" x="72" y="62" text-anchor="middle">vlib · vmap · vlog</text><text class="tl" x="72" y="75" text-anchor="middle">… · vsim</text><g class="xml"><rect x="46" y="84" width="52" height="18" rx="9"/><text x="72" y="97" text-anchor="middle">XMLs</text></g></g>
+              <g class="tool" data-i="1"><rect x="16" y="124" width="112" height="84" rx="8"/><text class="tt" x="72" y="142" text-anchor="middle">CDC</text><text class="tl" x="72" y="158" text-anchor="middle">qverify · cdc · rdc</text><text class="tl" x="72" y="171" text-anchor="middle">… · gcdc</text><g class="xml"><rect x="46" y="180" width="52" height="18" rx="9"/><text x="72" y="193" text-anchor="middle">XMLs</text></g></g>
+              <g class="tool" data-i="2"><rect x="16" y="220" width="112" height="84" rx="8"/><text class="tt" x="72" y="238" text-anchor="middle">Any tool (n)</text><text class="tl" x="72" y="254" text-anchor="middle">its own</text><text class="tl" x="72" y="267" text-anchor="middle">commands</text><g class="xml"><rect x="46" y="276" width="52" height="18" rx="9"/><text x="72" y="289" text-anchor="middle">XMLs</text></g></g>
+              <path class="link" data-i="0" d="M128 70 H 164"/>
+              <path class="link" data-i="1" d="M128 166 H 164"/>
+              <path class="link" data-i="2" d="M128 262 H 164"/>
+              <g class="bar"><rect x="166" y="14" width="236" height="302" rx="12"/><text class="bart" x="284" y="36" text-anchor="middle">Design Packager</text></g>
+              <text class="lbl" x="284" y="58" text-anchor="middle">pkgr run</text>
+              <path class="flow" d="M284 62 V 72"/>
+              <g class="seg" data-s="0"><rect x="206" y="74" width="156" height="34" rx="7"/><text x="284" y="95" text-anchor="middle">1 · command extraction</text></g>
+              <path class="flow" d="M284 108 V 128"/><text class="lbl" x="292" y="122">commands file</text>
+              <g class="seg" data-s="1"><rect x="206" y="130" width="156" height="34" rx="7"/><text x="284" y="151" text-anchor="middle">2 · command parsing</text></g>
+              <path class="flow" d="M284 164 V 184"/><text class="lbl" x="292" y="178">files</text>
+              <g class="seg" data-s="2"><rect x="206" y="186" width="156" height="34" rx="7"/><text x="284" y="207" text-anchor="middle">3 · files parsing</text></g>
+              <path class="flow loop" id="dpLoop" d="M362 212 H 382 V 196 H 362"/>
+              <text class="lbl" x="284" y="240" text-anchor="middle">recursively follows included files</text>
+              <text class="lbl" x="284" y="300" text-anchor="middle">shared core for every tool</text>
+              <path class="link out" id="dpOut" d="M402 166 H 416"/>
+              <g class="pkg"><rect x="418" y="134" width="96" height="64" rx="8"/><text x="466" y="154" text-anchor="middle">4 · design</text><text x="466" y="168" text-anchor="middle">output dir</text><text class="lbl" x="466" y="186" text-anchor="middle">collected files</text></g>
+              <circle class="dot" id="dpDot" cx="128" cy="70" r="5"/>
             </svg>
-            <div class="fig-leg">Same core for every product. Only the <b>XML contract</b> changes per tool; the output is always one <b>reproducible package</b>.</div>
+            <div class="fig-leg">Only the <b>XML contract</b> changes per tool. The pipeline and the <b>output directory</b> are the same for all.</div>
           </div>
         </div>
       </article>
@@ -765,27 +767,29 @@
   } else if(!reduce){loop();}
   sizeWave();drawWave();
 
-  /* ---------- Figure 01: one packager, every product ---------- */
+  /* ---------- Figure 01: any tool in, one output out ---------- */
   (function(){
     var svg=document.getElementById('dpSvg');if(!svg)return;
-    var tools=svg.querySelectorAll('.tool'),xmls=svg.querySelectorAll('.xml'),links=svg.querySelectorAll('.link[data-i]'),segs=svg.querySelectorAll('.seg'),pkg=svg.querySelector('.pkg'),dot=document.getElementById('dpDot');
-    var xs=[72,197,322,447],i=0,step=0;
+    var tools=svg.querySelectorAll('.tool'),links=svg.querySelectorAll('.link[data-i]'),segs=svg.querySelectorAll('.seg'),flows=svg.querySelectorAll('.flow:not(.loop)'),loop=document.getElementById('dpLoop'),out=document.getElementById('dpOut'),pkg=svg.querySelector('.pkg'),dot=document.getElementById('dpDot');
+    var ys=[70,166,262],i=0,step=0;
     function sel(list,k,cls){list.forEach(function(el,n){el.classList.toggle(cls,n===k);});}
-    function clearSegs(){segs.forEach(function(s){s.classList.remove('on','done');});}
+    function reset(){segs.forEach(function(s){s.classList.remove('on','done');});flows.forEach(function(f){f.classList.remove('on');});loop.classList.remove('on');out.classList.remove('on');pkg.classList.remove('on');}
     function tick(){
-      if(step===0){sel(tools,i,'on');sel(xmls,i,'on');sel(links,-1,'on');clearSegs();pkg.classList.remove('on');dot.setAttribute('cx',xs[i]);dot.setAttribute('cy',96);dot.classList.remove('on');}
-      if(step===1){sel(links,i,'on');dot.classList.add('on');requestAnimationFrame(function(){dot.setAttribute('cy',150);});}
-      if(step===2){dot.classList.remove('on');segs[0].classList.add('on');}
-      if(step===3){segs[0].classList.replace('on','done');segs[1].classList.add('on');}
-      if(step===4){segs[1].classList.replace('on','done');segs[2].classList.add('on');}
-      if(step===5){segs[2].classList.replace('on','done');pkg.classList.add('on');}
-      step++;if(step===7){step=0;i=(i+1)%tools.length;}
+      if(step===0){reset();sel(tools,i,'on');sel(links,-1,'on');dot.setAttribute('cx',128);dot.setAttribute('cy',ys[i]);dot.classList.remove('on');}
+      if(step===1){sel(links,i,'on');dot.classList.add('on');requestAnimationFrame(function(){dot.setAttribute('cx',164);});}
+      if(step===2){dot.classList.remove('on');flows[0].classList.add('on');segs[0].classList.add('on');}
+      if(step===3){segs[0].classList.replace('on','done');flows[1].classList.add('on');segs[1].classList.add('on');}
+      if(step===4){segs[1].classList.replace('on','done');flows[2].classList.add('on');segs[2].classList.add('on');loop.classList.add('on');}
+      if(step===5){loop.classList.remove('on');}
+      if(step===6){loop.classList.add('on');}
+      if(step===7){loop.classList.remove('on');segs[2].classList.replace('on','done');out.classList.add('on');pkg.classList.add('on');}
+      step++;if(step===9){step=0;i=(i+1)%tools.length;}
     }
     var timer=null,fig=svg.closest('.hl');
-    function start(){if(timer||reduce)return;timer=setInterval(tick,850);}
+    function start(){if(timer||reduce)return;timer=setInterval(tick,800);}
     function stop(){if(timer){clearInterval(timer);timer=null;}}
     if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(en){en.isIntersecting?start():stop();});},{threshold:.2}).observe(fig);}else start();
-    tick();if(reduce){sel(links,0,'on');segs.forEach(function(s){s.classList.add('done');});pkg.classList.add('on');}
+    tick();if(reduce){sel(links,0,'on');segs.forEach(function(s){s.classList.add('done');});flows.forEach(function(f){f.classList.add('on');});out.classList.add('on');pkg.classList.add('on');}
   })();
 
   /* ---------- Figure 02: one time slot, sequential vs parallel ---------- */
