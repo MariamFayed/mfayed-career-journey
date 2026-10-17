@@ -392,7 +392,7 @@
     <div class="sec-head reveal">
       <span class="eyebrow">01 — Experience</span>
       <h2 id="journey-h">Career timeline</h2>
-      <p>Computer engineering at Ain Shams University, internships at Siemens, IBM and Valoro, and four years in R&amp;D at Siemens Digital Industries Software.</p>
+      <p>Computer engineering at Ain Shams University, internships at Siemens and IBM, and four years in R&amp;D at Siemens Digital Industries Software.</p>
     </div>
 
     <div class="timeline">
@@ -412,16 +412,6 @@
       </div>
 
       <div class="tl">
-        <span class="dot"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 3-2 4-3 6H8c-1-2-3-3-3-6a7 7 0 0 1 7-7zM9 19h6M10 22h4"/></svg></span>
-        <div class="tl-card">
-          <span class="tl-date">Aug — Sep 2020</span>
-          <div class="tl-role">Artificial Intelligence Intern</div>
-          <div class="tl-org">Valoro</div>
-          <ul><li>Worked the full SDLC, requirements to deployment, on a <b>full-stack AI virtual medical assistant</b>.</li></ul>
-        </div>
-      </div>
-
-      <div class="tl">
         <span class="dot"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
         <div class="tl-card">
           <span class="tl-date">Nov 2020 — Sep 2021</span>
@@ -429,17 +419,6 @@
           <div class="tl-org">Siemens</div>
           <ul><li>Built scripts and tools that <b>automated testing activities</b> and raised the team's testing efficiency.</li></ul>
           <div class="tags"><span class="tag">Python</span><span class="tag">Shell</span></div>
-        </div>
-      </div>
-
-      <div class="tl">
-        <span class="dot"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H4zM8 20h8M12 16v4M8 10l2 2 4-4"/></svg></span>
-        <div class="tl-card">
-          <span class="tl-date">Sep — Dec 2021</span>
-          <div class="tl-role">Software Research Intern</div>
-          <div class="tl-org">Siemens</div>
-          <ul><li>Evaluated TypeScript testing tools, <b>selected Jest</b>, and implemented unit tests for CI/CD pipelines.</li></ul>
-          <div class="tags"><span class="tag">TypeScript</span><span class="tag">Jest</span><span class="tag">CI/CD</span></div>
         </div>
       </div>
 
@@ -463,7 +442,7 @@
           <ul>
             <li><b>Technical owner of Design Packager</b>, the packaging tool shared by all Siemens verification products. Customer-requested features end to end, from requirements and specs through release, with Application Engineers, Product Engineers and partner R&amp;D teams.</li>
             <li><b>QuestaSim Graph-based Elaboration</b>: owns the Cross Variant Connectivity area. Delivered features and performance work that cut runtime and memory and improved scaling on complex designs.</li>
-            <li><b>Parallel simulation initiative</b>: multithreaded C++ prototypes (partitioning, synchronization, result merging) and a <b>GPU-based prototype</b> that ran significantly faster than CPU and standard Questa with identical results.</li>
+            <li><b>Parallel simulation initiative</b>: multithreaded C++ prototypes that decentralize process execution across threads with minimal sync points, and a <b>GPU-based proof of concept</b> with a large gain over CPU and standard Questa.</li>
             <li>Added <b>ARM platform build support</b>, integrated new tools, mentored interns and junior engineers, wrote documentation used across teams.</li>
           </ul>
           <div class="tags"><span class="tag on">C++</span><span class="tag on">Multithreading</span><span class="tag">CUDA</span><span class="tag">Linux x86-64 · ARM</span><span class="tag">Jenkins</span><span class="tag">Perforce</span></div>
@@ -490,19 +469,19 @@
           <span class="hl-num">Project 01 · Siemens EDA</span>
           <span class="badge"><i></i>Technical owner · 2022 to present</span>
           <h3>Design Packager: reproducible packaging of verification runs</h3>
-          <p>Reproducing a customer issue often requires hundreds of files, environment variables and tool options spread across their machines. Design Packager observes one run, builds a <b>dependency graph</b> of every command, file and environment variable it touched, and materializes a self-contained package that replays elsewhere.</p>
-          <p>It is a dependency-discovery framework, not a copy utility. The pipeline is fixed; what varies is pushed into <b>declarative metadata</b>: options, file arguments, environment rules, search precedence. One generic parser reads those templates, so a new tool or option rarely touches the packaging algorithm. Mariam owns it end to end, from customer requests to release, integrated new tools, and added <b>ARM platform</b> support.</p>
+          <p>Design Packager is a <b>horizontal tool shared across Siemens product lines</b>. Given one run of a verification tool, it discovers every command, file and environment variable involved, builds a dependency graph, and produces a self-contained package that reproduces the run anywhere.</p>
+          <p>It is built to be <b>extensible and scalable</b>. A new tool is integrated by introducing an <b>XML file describing its commands</b>; the packager reads that file and handles the parsing, processing and packaging of the design internally. That core is <b>common to all tools and a black box to them</b>, and the XML interface is the contract between each tool and the packager. Mariam owns the tool end to end, from customer requests to release, integrated new tools through this interface, and added <b>ARM platform</b> support.</p>
           <div class="pillrow">
-            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 7v4M12 11l-6 6M12 11l6 6"/></svg></span><div><h4>Graph before package</h4><span>Paths are rewritten only after the whole graph is known.</span></div></div>
-            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM8 9h8M8 13h8M8 17h5"/></svg></span><div><h4>Metadata, not parsers</h4><span>One generic parser fed by XML option templates.</span></div></div>
-            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5"/></svg></span><div><h4>Five layers</h4><span>Orchestrate, extract, interpret, discover, materialize.</span></div></div>
+            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg></span><div><h4>Horizontal across products</h4><span>One packager serving every verification product line.</span></div></div>
+            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM8 9h8M8 13h8M8 17h5"/></svg></span><div><h4>XML is the contract</h4><span>A tool plugs in by describing its commands in XML.</span></div></div>
+            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5"/></svg></span><div><h4>Common black-box core</h4><span>Parsing, processing and packaging are shared by all tools.</span></div></div>
           </div>
           <div class="tiers" aria-label="Extension cost model">
-            <div class="tier"><b>Low cost</b><span>Add an option, a file argument or an env rule: metadata only.</span></div>
-            <div class="tier"><b>Medium</b><span>New embedded command family or converter: metadata plus a small front end.</span></div>
-            <div class="tier hi"><b>High</b><span>New executable or source language: new parser, line manager and runtime path.</span></div>
+            <div class="tier"><b>New tool or option</b><span>Add or extend an XML file with the command details. No core changes.</span></div>
+            <div class="tier"><b>New command family</b><span>XML plus a small front-end recognizer; the core stays untouched.</span></div>
+            <div class="tier hi"><b>New source language</b><span>The only case that reaches the shared core: a new file parser.</span></div>
           </div>
-          <div class="tags"><span class="tag on">C++</span><span class="tag">XML templates</span><span class="tag">Strategy · Factory · Registry</span><span class="tag">Composite options</span><span class="tag">ARM · x86-64</span></div>
+          <div class="tags"><span class="tag on">C++</span><span class="tag on">XML interface</span><span class="tag">Strategy · Factory · Registry</span><span class="tag">ARM · x86-64</span></div>
         </div>
         <div class="fig dp">
           <div class="fig-top"><span class="dots"><i></i><i></i><i></i></span><span class="ttl">design_packager · session</span><span class="live"><i></i>discovering</span></div>
@@ -529,7 +508,7 @@
               <g class="node" style="--d:2.4s"><text class="note" x="137" y="284">2 parents · stored once</text></g>
             </svg>
             <div class="dp-out"><span style="--d:2.6s">rewrite paths</span><i>→</i><span style="--d:2.8s">package/src</span><span style="--d:2.9s">package/lib</span><span style="--d:3s">run.sh</span><i>→</i><span class="pkg" style="--d:3.2s">design_pkg.tar.gz</span></div>
-            <div class="fig-leg">One observed run becomes a graph of <b>commands, files and environment</b>. The archive is generated only after the graph is complete, so every path can be rewritten consistently.</div>
+            <div class="fig-leg">Tool-specific knowledge lives in <b>XML</b>; discovery, path rewriting and packaging are the <b>shared core</b>. One observed run becomes a dependency graph, then a reproducible archive.</div>
           </div>
         </div>
       </article>
@@ -540,14 +519,13 @@
           <span class="hl-num">Project 02 · QuestaSim parallel simulation initiative</span>
           <span class="badge"><i></i>C++20 coroutines · thread pool · research prototype</span>
           <h3>Parallel Simulation Kernel: a coroutine-based discrete-event simulator</h3>
-          <p>A discrete-event hardware simulator built from scratch in modern C++. Clocks, flip-flops, memories and testbenches are <b>coroutines</b> that <span class="mono">co_await</span> into a scheduling region and resume later in simulation time. Signals carry 0, 1, X and Z, and keep whole-signal, bit-level and edge-specific trigger lists, so a change wakes exactly the processes that care.</p>
-          <p>A <b>thread pool</b> runs each region's events in parallel on a deterministic index partition, and a <b>barrier</b> stops the kernel from advancing time until every worker is done. Event-local signal caches isolate intermediate results. The design documentation also records the main open problem: with parallel writers, deterministic commit ordering is not yet enforced.</p>
+          <p>A prototype that <b>decentralizes the execution of simulation processes</b> from a single kernel thread to several worker threads. At every simulation time slot, millions of processes and events become ready, and most of them are independent, so they can run in parallel instead of one after another.</p>
+          <p>The kernel is written from scratch in modern C++. Processes are <b>coroutines</b> that suspend into a scheduling region and resume later in simulation time, a thread pool executes each region's events on a deterministic partition, and synchronization is kept to <b>minimal, well-defined sync points</b> (region barriers and commit phases) chosen to preserve <b>correctness and deterministic results</b> while leaving the parallel phase free to run.</p>
           <div class="pillrow">
-            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M3 12h3l2-6 4 12 2-6h7"/></svg></span><div><h4>Hardware semantics</h4><span>ACTIVE → UPDATE → TRIGGERED → INACTIVE → NBA regions.</span></div></div>
-            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="1.6"/><circle cx="14" cy="12" r="1.6"/><circle cx="10" cy="18" r="1.6"/></svg></span><div><h4>Region barrier</h4><span>Workers finish before time advances.</span></div></div>
-            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="8"/></svg></span><div><h4>Copy, compute, await, publish</h4><span>The safe process pattern across a suspension.</span></div></div>
+            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="1.6"/><circle cx="14" cy="12" r="1.6"/><circle cx="10" cy="18" r="1.6"/></svg></span><div><h4>Decentralized execution</h4><span>One kernel dispatches; several threads execute.</span></div></div>
+            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M3 12h3l2-6 4 12 2-6h7"/></svg></span><div><h4>Millions of events per slot</h4><span>Independent processes in a time slot run in parallel.</span></div></div>
+            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><div><h4>Minimal sync points</h4><span>Region barriers and commit phases keep results correct and deterministic.</span></div></div>
           </div>
-          <div class="next"><b>Next on the roadmap:</b> buffered signal writes committed in a fixed order (time → region → process → signal), immutable region snapshots, an explicit execution-policy object instead of global mode flags, and determinism tests across thread counts.</div>
           <div class="tags"><span class="tag on">C++20</span><span class="tag on">Coroutines</span><span class="tag">TBB concurrent_vector</span><span class="tag">Atomics</span><span class="tag">SystemVerilog regions</span></div>
         </div>
         <div class="fig">
@@ -560,7 +538,7 @@
               <div class="worker"><b>worker 0</b><span class="ev">e0</span><span class="ev">e2</span><span class="ev">e4</span><span class="bar">idle</span></div>
               <div class="worker"><b>worker 1</b><span class="ev">e1</span><span class="ev">e3</span><span class="ev">e5</span><span class="bar">idle</span></div>
             </div>
-            <div class="fig-leg">Live: the kernel steps regions in order; the counter samples on <b>posedge clk</b> and publishes in <b>NBA</b>. The barrier waits for both workers before the next region.</div>
+            <div class="fig-leg">Live: the kernel steps regions in order; events in a region run on both workers, and the <b>barrier</b> is the only sync point before the next region. The counter samples on <b>posedge clk</b> and publishes in <b>NBA</b>.</div>
           </div>
         </div>
       </article>
@@ -613,12 +591,14 @@
           <span class="hl-num">Project 04 · QuestaSim parallel simulation initiative</span>
           <span class="badge"><i></i>CUDA · performance prototype</span>
           <h3>GPU-accelerated simulation prototype</h3>
-          <p>After the multithreaded CPU prototypes, Mariam designed and implemented a <b>GPU-based approach</b>: partition the simulation data, run the parallel phase as CUDA kernels, then merge results back into the kernel's state. It ran <b>significantly faster</b> than both the CPU prototype and standard Questa execution while keeping results <b>functionally identical</b>.</p>
+          <p>After the multithreaded CPU work, Mariam designed a proof of concept around what GPUs are good at: the same operation applied to a large amount of data at once. She <b>identified the kernel function that the simulator applies repeatedly over large data</b>, the SIMD-shaped part of the workload, and restructured that phase to run as CUDA kernels, with partitioning before and a merge back into simulator state after.</p>
+          <p>The result was a <b>large performance gain</b> over both the CPU prototype and standard Questa execution, with results kept <b>functionally identical</b>.</p>
           <div class="pillrow">
-            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></span><div><h4>Partition · compute · merge</h4><span>Data-parallel phase with a serial merge.</span></div></div>
+            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg></span><div><h4>Find the SIMD hot spot</h4><span>One kernel function, applied repeatedly to a lot of data.</span></div></div>
+            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></span><div><h4>Design for the GPU</h4><span>Partition, run as CUDA kernels, merge back.</span></div></div>
             <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><div><h4>Correctness first</h4><span>Results checked against standard Questa.</span></div></div>
           </div>
-          <div class="tags"><span class="tag on">CUDA</span><span class="tag on">C++</span><span class="tag">POSIX threads</span><span class="tag">Profiling</span></div>
+          <div class="tags"><span class="tag on">CUDA</span><span class="tag on">C++</span><span class="tag">SIMD</span><span class="tag">Profiling</span></div>
         </div>
         <div class="fig">
           <div class="fig-top"><span class="dots"><i></i><i></i><i></i></span><span class="ttl">same workload · two engines</span><span class="live"><i></i>running</span></div>
@@ -627,7 +607,7 @@
               <div class="pane"><h5>CPU <b>8 threads</b></h5><div class="cpu" id="cpuLanes"></div><div class="done">finishes last</div></div>
               <div class="pane"><h5>GPU <b>thousands of threads</b></h5><div class="ggrid" id="gpuGrid"></div><div class="done">same result, much earlier</div></div>
             </div>
-            <div class="fig-leg">Illustrative timing only. The prototype was <b>significantly faster</b> than CPU and standard Questa; exact figures are available on request.</div>
+            <div class="fig-leg">Illustrative timing only. The same SIMD-shaped phase runs as one CUDA kernel across thousands of threads; the prototype showed a <b>large gain</b> over CPU and standard Questa. Exact figures are available on request.</div>
           </div>
         </div>
       </article>
@@ -667,12 +647,12 @@
       </div>
       <div class="card span-4 reveal">
         <div class="eyebrow">Scripting &amp; other languages</div>
-        <div class="tags"><span class="tag on">Python</span><span class="tag on">Tcl</span><span class="tag">Shell</span><span class="tag">SQL</span><span class="tag">Java</span><span class="tag">C#</span><span class="tag">TypeScript · Jest</span></div>
+        <div class="tags"><span class="tag on">Python</span><span class="tag on">Tcl</span><span class="tag">Shell</span><span class="tag">SQL</span><span class="tag">Java</span><span class="tag">C#</span></div>
       </div>
       <div class="card span-4 reveal">
         <div class="eyebrow">AI &amp; automation</div>
         <div class="tags"><span class="tag">LLMs</span><span class="tag">AI agents</span><span class="tag">Generative AI tooling</span></div>
-        <p>Built a full-stack AI medical assistant as an intern; uses AI tools in daily engineering work.</p>
+        <p>Uses LLM-based tools and agents as part of day-to-day engineering work.</p>
       </div>
       <div class="card span-12 trio reveal">
         <div><div class="eyebrow">Education</div><h3 style="margin-top:6px">B.Sc. Computer Engineering</h3><p>Ain Shams University, 2017 to 2022. GPA 3.8 / 4.0, Excellent, ranked 3rd in class.</p></div>
