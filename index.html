@@ -245,20 +245,27 @@
   .dp-out span.pkg{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent)}
   .dp-out i{color:var(--faint);font-style:normal}
   .hl.in .dp-out span{opacity:1;transform:none}
-  /* 02 kernel */
-  .krow{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:10px}
-  .krow b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
-  .kregions{display:flex;gap:4px;font-family:var(--f-mono);font-size:10.5px;flex-wrap:wrap;margin-bottom:12px}
-  .kregions span{flex:1;min-width:64px;text-align:center;padding:7px 4px;border-radius:6px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted);transition:background .2s,color .2s,border-color .2s}
-  .kregions span.on{background:color-mix(in srgb,var(--accent) 18%,transparent);border-color:var(--accent);color:var(--ink)}
-  .kwave{width:100%;height:118px;display:block;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
-  .workers{display:grid;gap:6px;margin-top:12px}
-  .worker{display:flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:11px;flex-wrap:wrap}
-  .worker b{width:70px;color:var(--muted);font-weight:500}
-  .worker .ev{padding:3px 8px;border-radius:5px;border:1px solid var(--line);background:var(--surface-2);color:var(--muted);transition:background .15s,color .15s,border-color .15s}
-  .worker .ev.on{background:color-mix(in srgb,var(--signal) 22%,transparent);border-color:var(--signal);color:var(--ink)}
-  .worker .bar{margin-left:auto;font-size:10px;color:var(--faint)}
-  .worker .bar.on{color:var(--ok)}
+  /* 02 sequential vs parallel */
+  .psim{display:grid;gap:14px}
+  .plane{display:grid;grid-template-columns:132px 1fr auto;gap:12px;align-items:center}
+  @media(max-width:480px){.plane{grid-template-columns:1fr;gap:8px}}
+  .plab{font-family:var(--f-mono);font-size:11px;color:var(--muted);line-height:1.45}
+  .plab b{display:block;color:var(--ink);font-weight:500}
+  .pgrid{display:grid;grid-template-columns:repeat(12,1fr);gap:4px}
+  .pgrid.par{grid-template-rows:repeat(4,1fr)}
+  .pbox{aspect-ratio:1.15;border-radius:4px;background:var(--surface-2);border:1px solid var(--line);transition:background .2s,border-color .2s}
+  .pbox.run{background:var(--accent);border-color:var(--accent)}
+  .pbox.done{background:color-mix(in srgb,var(--accent) 35%,var(--surface-2));border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
+  .psync{grid-column:4;grid-row:1/-1;width:3px;border-radius:2px;background:var(--line);justify-self:start;transition:background .15s,box-shadow .15s}
+  .psync.on{background:var(--signal);box-shadow:0 0 10px var(--signal)}
+  .slot{font-family:var(--f-mono);font-size:11px;padding:4px 9px;border:1px solid var(--line-strong);border-radius:999px;white-space:nowrap;color:var(--muted);font-variant-numeric:tabular-nums}
+  .slot b{color:var(--ink);font-weight:500}
+  .pkey{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+  .pkey span{display:inline-flex;align-items:center;gap:6px}
+  .pkey .k{width:11px;height:11px;border-radius:3px;display:block;background:var(--surface-2);border:1px solid var(--line)}
+  .pkey .k.run{background:var(--accent);border-color:var(--accent)}
+  .pkey .k.done{background:color-mix(in srgb,var(--accent) 35%,var(--surface-2))}
+  .pkey .k.sync{width:3px;border-radius:2px;background:var(--signal);border:0}
   /* 03 GBE */
   .gbe svg{width:100%;height:auto;display:block;overflow:visible}
   .gbe .box{transform-box:fill-box;transform-origin:center;opacity:0;transform:scale(.96);transition:opacity .5s ease var(--d,0s),transform .5s ease var(--d,0s)}
@@ -274,22 +281,25 @@
   .gains{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
   .gains span{font-family:var(--f-mono);font-size:11.5px;padding:5px 10px;border-radius:999px;border:1px solid var(--line-strong);color:var(--ink)}
   .gains span b{color:var(--ok);font-weight:600}
-  /* 04 GPU */
-  .gpu{display:grid;grid-template-columns:1fr 2fr;gap:14px}
-  @media(max-width:480px){.gpu{grid-template-columns:1fr}}
-  .gpu .pane{border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--bg);min-width:0}
-  .gpu .pane h5{font-family:var(--f-mono);font-size:11px;font-weight:500;color:var(--muted);margin-bottom:8px;display:flex;justify-content:space-between;gap:8px}
-  .gpu .pane h5 b{color:var(--ink);font-weight:500;text-align:right}
-  .cpu{display:grid;gap:5px}
-  .cpu i{display:block;height:9px;border-radius:3px;background:var(--surface-2);position:relative;overflow:hidden}
-  .cpu i::after{content:"";position:absolute;inset:0;background:var(--accent);transform:scaleX(0);transform-origin:left}
-  .hl.in .cpu i::after{animation:fillx 10s linear infinite var(--d,0s)}
-  @keyframes fillx{0%{transform:scaleX(0)}75%{transform:scaleX(1)}92%{transform:scaleX(1)}100%{transform:scaleX(0)}}
-  .ggrid{display:grid;grid-template-columns:repeat(16,1fr);gap:3px}
-  .ggrid i{aspect-ratio:1;display:block;border-radius:2px;background:var(--surface-2)}
-  .hl.in .ggrid i{animation:cell 10s linear infinite var(--d,0s)}
-  @keyframes cell{0%{background:var(--surface-2)}5%{background:var(--signal)}20%{background:var(--signal)}32%{background:var(--surface-2)}100%{background:var(--surface-2)}}
-  .gpu .done{font-family:var(--f-mono);font-size:10.5px;color:var(--ok);margin-top:8px}
+  /* 04 SIMD onto GPU */
+  .gpu2{display:grid;gap:10px}
+  .grow{display:grid;grid-template-columns:132px 1fr;gap:12px;align-items:center}
+  @media(max-width:480px){.grow{grid-template-columns:1fr;gap:6px}}
+  .cells{display:grid;grid-template-columns:repeat(24,1fr);gap:2px}
+  .cells i{aspect-ratio:1;border-radius:2px;background:var(--surface-2);border:1px solid var(--line);display:block;transition:background .3s,border-color .3s}
+  .cells.ready i{background:color-mix(in srgb,var(--accent) 22%,var(--surface-2));border-color:color-mix(in srgb,var(--accent) 30%,var(--line))}
+  .cells.fire i{background:var(--signal);border-color:var(--signal)}
+  .gmap{display:grid;grid-template-columns:132px 1fr;gap:12px}
+  .gmap span{grid-column:2;justify-self:center;font-family:var(--f-mono);font-size:10.5px;color:var(--faint);position:relative;padding:0 8px}
+  .gmap span::before,.gmap span::after{content:"";position:absolute;top:50%;width:40px;height:1px;background:var(--line-strong)}
+  .gmap span::before{right:100%}.gmap span::after{left:100%}
+  .bus{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+  .busrow{display:flex;align-items:center;gap:10px}
+  .busrow .track{flex:1;position:relative;height:14px;border-top:1px dashed var(--line-strong);border-bottom:1px dashed var(--line-strong)}
+  .pkt{position:absolute;top:3px;left:0;width:26px;height:8px;border-radius:4px;background:var(--accent);opacity:0;transition:left .8s ease,opacity .25s}
+  .pkt.in,.pkt.hold{opacity:1;left:calc(100% - 26px)}
+  .pkt.out{opacity:1;left:0}
+  .bmsg{font-size:10.5px;color:var(--faint);text-align:center;margin-top:4px;min-height:14px}
 
   /* ============================ Skills ============================ */
   .skills{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
@@ -336,7 +346,6 @@
     .reveal,.rise,.tl .dot,.tl-card,.tl-card li,.dp .node,.dp-out span,.gbe .box{opacity:1!important;transform:none!important}
     .dp .edge,.gbe .edge{stroke-dashoffset:0!important}
     .tl .dot::after{display:none}
-    .hl.in .cpu i::after{transform:scaleX(.8)} .hl.in .ggrid i{background:var(--signal)}
     .skill .bar i{width:var(--w)}
   }
 </style>
@@ -520,7 +529,7 @@
           <span class="badge"><i></i>C++20 coroutines · thread pool · research prototype</span>
           <h3>Parallel Simulation Kernel: a coroutine-based discrete-event simulator</h3>
           <p>A prototype that <b>decentralizes the execution of simulation processes</b> from a single kernel thread to several worker threads. At every simulation time slot, millions of processes and events become ready, and most of them are independent, so they can run in parallel instead of one after another.</p>
-          <p>The kernel is written from scratch in modern C++. Processes are <b>coroutines</b> that suspend into a scheduling region and resume later in simulation time, a thread pool executes each region's events on a deterministic partition, and synchronization is kept to <b>minimal, well-defined sync points</b> (region barriers and commit phases) chosen to preserve <b>correctness and deterministic results</b> while leaving the parallel phase free to run.</p>
+          <p>The kernel is written from scratch in modern C++. Processes are <b>coroutines</b> that suspend into a scheduling region and resume later in simulation time, a thread pool executes each region's events on a deterministic partition, and synchronization is kept to <b>minimal, well-defined sync points</b> (region barriers and commit phases) chosen to preserve <b>correctness and deterministic results</b> while remaining fully <b>compliant with the SystemVerilog LRM</b>.</p>
           <div class="pillrow">
             <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="1.6"/><circle cx="14" cy="12" r="1.6"/><circle cx="10" cy="18" r="1.6"/></svg></span><div><h4>Decentralized execution</h4><span>One kernel dispatches; several threads execute.</span></div></div>
             <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M3 12h3l2-6 4 12 2-6h7"/></svg></span><div><h4>Millions of events per slot</h4><span>Independent processes in a time slot run in parallel.</span></div></div>
@@ -528,17 +537,23 @@
           </div>
           <div class="tags"><span class="tag on">C++20</span><span class="tag on">Coroutines</span><span class="tag">TBB concurrent_vector</span><span class="tag">Atomics</span><span class="tag">SystemVerilog regions</span></div>
         </div>
-        <div class="fig">
-          <div class="fig-top"><span class="dots"><i></i><i></i><i></i></span><span class="ttl">sim kernel · 2-bit counter</span><span class="live"><i></i>2 workers</span></div>
+        <div class="fig psimfig">
+          <div class="fig-top"><span class="dots"><i></i><i></i><i></i></span><span class="ttl">one time slot · 12 independent processes</span><span class="live"><i></i>running</span></div>
           <div class="fig-body">
-            <div class="krow"><span>t = <b id="kTime">0 ns</b></span><span>iteration <b id="kIter">0</b></span><span>q = <b id="kQ">00</b></span></div>
-            <div class="kregions" id="kRegions"><span>ACTIVE</span><span>UPDATE_GLOBAL</span><span>TRIGGERED</span><span>INACTIVE</span><span>NBA</span></div>
-            <canvas class="kwave" id="kWave" aria-hidden="true"></canvas>
-            <div class="workers">
-              <div class="worker"><b>worker 0</b><span class="ev">e0</span><span class="ev">e2</span><span class="ev">e4</span><span class="bar">idle</span></div>
-              <div class="worker"><b>worker 1</b><span class="ev">e1</span><span class="ev">e3</span><span class="ev">e5</span><span class="bar">idle</span></div>
+            <div class="psim">
+              <div class="plane">
+                <div class="plab"><b>Questa today</b>1 thread, one after another</div>
+                <div class="pgrid" id="seqRow"></div>
+                <div class="slot">slot <b id="seqSlot">0</b></div>
+              </div>
+              <div class="plane">
+                <div class="plab"><b>Parallel kernel</b>4 threads, then sync</div>
+                <div class="pgrid par" id="parGrid"></div>
+                <div class="slot">slot <b id="parSlot">0</b></div>
+              </div>
+              <div class="pkey"><span><i class="k run"></i>running</span><span><i class="k done"></i>done</span><span><i class="k sync"></i>sync before next slot</span></div>
             </div>
-            <div class="fig-leg">Live: the kernel steps regions in order; events in a region run on both workers, and the <b>barrier</b> is the only sync point before the next region. The counter samples on <b>posedge clk</b> and publishes in <b>NBA</b>.</div>
+            <div class="fig-leg">Same processes, same results per slot. Independent processes run together on threads and synchronize once before the next time slot, staying <b>LRM-compliant</b>.</div>
           </div>
         </div>
       </article>
@@ -576,7 +591,7 @@
               <g class="box" style="--d:1.7s"><rect x="400" y="140" width="104" height="32" rx="6"/><text x="412" y="160">fifo&lt;W=16&gt;</text></g>
               <path class="edge x" style="--d:2s" d="M255 138 C 255 160, 255 160, 255 176"/>
               <g class="box" style="--d:2.2s"><text class="xlbl" x="262" y="162">u1.out → u2.in</text></g>
-              <g class="box" style="--d:2.3s"><text class="lbl" x="400" y="110">u0 and u2 share one node</text></g>
+              <g class="box" style="--d:2.3s"><text class="lbl" x="400" y="110">shared by u0 + u2</text></g>
               <g class="box" style="--d:2.4s"><text class="xlbl" x="262" y="236">cross-variant connection, W=16 to W=8</text></g>
             </svg>
             <div class="gains"><span>runtime <b>↓</b></span><span>memory <b>↓</b></span><span>scales on complex designs <b>✓</b></span></div>
@@ -591,23 +606,34 @@
           <span class="hl-num">Project 04 · QuestaSim parallel simulation initiative</span>
           <span class="badge"><i></i>CUDA · performance prototype</span>
           <h3>GPU-accelerated simulation prototype</h3>
-          <p>After the multithreaded CPU work, Mariam designed a proof of concept around what GPUs are good at: the same operation applied to a large amount of data at once. She <b>identified the kernel function that the simulator applies repeatedly over large data</b>, the SIMD-shaped part of the workload, and restructured that phase to run as CUDA kernels, with partitioning before and a merge back into simulator state after.</p>
-          <p>The result was a <b>large performance gain</b> over both the CPU prototype and standard Questa execution, with results kept <b>functionally identical</b>.</p>
+          <p>In large designs, one time slot can hold <b>thousands to millions of processes executing the same function</b> on different data. That shape maps directly onto GPU threads.</p>
+          <p>The proof of concept runs that phase as CUDA kernels and keeps <b>host-to-device copying to a minimum</b>. Result: a <b>large gain</b> over the CPU prototype and standard Questa, with functionally identical output.</p>
           <div class="pillrow">
-            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg></span><div><h4>Find the SIMD hot spot</h4><span>One kernel function, applied repeatedly to a lot of data.</span></div></div>
-            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></span><div><h4>Design for the GPU</h4><span>Partition, run as CUDA kernels, merge back.</span></div></div>
-            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><div><h4>Correctness first</h4><span>Results checked against standard Questa.</span></div></div>
+            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></span><div><h4>Same function, many processes</h4><span>SIMD-shaped work at each time slot.</span></div></div>
+            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 12h16M12 4v16"/></svg></span><div><h4>Scale to GPU threads</h4><span>One kernel launch per slot.</span></div></div>
+            <div class="pill"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg></span><div><h4>Minimal copying</h4><span>Host and device exchange data once per batch.</span></div></div>
           </div>
           <div class="tags"><span class="tag on">CUDA</span><span class="tag on">C++</span><span class="tag">SIMD</span><span class="tag">Profiling</span></div>
         </div>
-        <div class="fig">
-          <div class="fig-top"><span class="dots"><i></i><i></i><i></i></span><span class="ttl">same workload · two engines</span><span class="live"><i></i>running</span></div>
+        <div class="fig gpufig">
+          <div class="fig-top"><span class="dots"><i></i><i></i><i></i></span><span class="ttl">one time slot · same function, many processes</span><span class="live"><i></i>running</span></div>
           <div class="fig-body">
-            <div class="gpu">
-              <div class="pane"><h5>CPU <b>8 threads</b></h5><div class="cpu" id="cpuLanes"></div><div class="done">finishes last</div></div>
-              <div class="pane"><h5>GPU <b>thousands of threads</b></h5><div class="ggrid" id="gpuGrid"></div><div class="done">same result, much earlier</div></div>
+            <div class="gpu2">
+              <div class="grow">
+                <div class="plab"><b>Time slot</b>thousands of identical processes</div>
+                <div class="cells" id="procCells"></div>
+              </div>
+              <div class="gmap" aria-hidden="true"><span>map 1 : 1</span></div>
+              <div class="grow">
+                <div class="plab"><b>GPU</b>one kernel, all threads at once</div>
+                <div class="cells" id="gpuCells"></div>
+              </div>
+              <div class="grow">
+                <div class="plab"><b>Host ↔ device</b>copy once per batch</div>
+                <div class="bus"><div class="busrow"><span>host</span><span class="track"><i class="pkt" id="pkt"></i></span><span>device</span></div><div class="bmsg" id="busMsg">idle</div></div>
+              </div>
             </div>
-            <div class="fig-leg">Illustrative timing only. The same SIMD-shaped phase runs as one CUDA kernel across thousands of threads; the prototype showed a <b>large gain</b> over CPU and standard Questa. Exact figures are available on request.</div>
+            <div class="fig-leg">Illustrative. One kernel launch covers every process in the slot, and data crosses the host–device boundary once per batch, not once per process.</div>
           </div>
         </div>
       </article>
@@ -702,7 +728,7 @@
     var next=isDark()?'light':'dark';root.setAttribute('data-theme',next);
     try{localStorage.setItem('mf-theme',next);}catch(e){}
     document.querySelector('meta[name="theme-color"]').setAttribute('content',next==='dark'?'#121A15':'#F2F4EF');
-    drawWave();if(window.__kdraw)window.__kdraw();
+    drawWave();
   });
 
   /* ---------- Reveal on scroll ---------- */
@@ -793,53 +819,54 @@
   } else if(!reduce){loop();}
   sizeWave();drawWave();
 
-  /* ---------- GPU figure cells ---------- */
+  /* ---------- Figure 02: one time slot, sequential vs parallel ---------- */
   (function(){
-    var cpu=document.getElementById('cpuLanes'),grid=document.getElementById('gpuGrid');
-    var h='';for(var i=0;i<8;i++){h+='<i style="--d:'+(i*0.9).toFixed(2)+'s"></i>';}cpu.innerHTML=h;
-    h='';for(var r=0;r<8;r++){for(var c=0;c<16;c++){h+='<i style="--d:'+((r*16+c)*0.02).toFixed(3)+'s"></i>';}}grid.innerHTML=h;
-  })();
-
-  /* ---------- Simulation kernel figure: a tiny discrete-event loop driving a 2-bit counter ---------- */
-  (function(){
-    var regions=document.querySelectorAll('#kRegions span'),tEl=document.getElementById('kTime'),iEl=document.getElementById('kIter'),qEl=document.getElementById('kQ');
-    var evs=document.querySelectorAll('.worker .ev'),bars=document.querySelectorAll('.worker .bar');
-    var kc=document.getElementById('kWave');if(!kc)return;var kx=kc.getContext('2d');
-    var clk=0,q=0,qNext=0,tm=0,iter=0,reg=0,hist=[];var MAX=28;
-    for(var i=0;i<MAX;i++)hist.push({clk:0,q0:0,q1:0});
-    function draw(){
-      var r=kc.getBoundingClientRect();if(r.width===0)return;var dpr=Math.min(2,window.devicePixelRatio||1);
-      kc.width=r.width*dpr;kc.height=r.height*dpr;kx.setTransform(dpr,0,0,dpr,0,0);
-      var W=r.width,H=r.height;kx.clearRect(0,0,W,H);
-      var lanes=[['clk','clk',css('--line-strong')],['q[0]','q0',css('--accent')],['q[1]','q1',css('--signal')]];
-      var left=40,step=(W-left-8)/MAX,amp=9;
-      kx.font='10px '+css('--f-mono');kx.textBaseline='middle';
-      lanes.forEach(function(l,li){
-        var y=18+li*34;kx.fillStyle=css('--muted');kx.fillText(l[0],6,y);
-        kx.strokeStyle=l[2];kx.lineWidth=l[1]==='clk'?1.5:2;kx.beginPath();
-        for(var i=0;i<MAX;i++){var v=hist[i][l[1]];var x=left+i*step;var yy=y+(v?-amp:amp);
-          if(i===0)kx.moveTo(x,yy);else{kx.lineTo(x,y+(hist[i-1][l[1]]?-amp:amp));kx.lineTo(x,yy);}kx.lineTo(x+step,yy);}
-        kx.stroke();
-      });
-      kx.strokeStyle=css('--accent');kx.globalAlpha=.5;kx.setLineDash([3,4]);kx.beginPath();kx.moveTo(W-8,4);kx.lineTo(W-8,H-4);kx.stroke();kx.setLineDash([]);kx.globalAlpha=1;
-    }
-    window.__kdraw=draw;
-    function setRegion(i){regions.forEach(function(s,k){s.classList.toggle('on',k===i);});}
-    function workers(on){evs.forEach(function(e,k){e.classList.toggle('on',on&&(k%3)<=(iter%3));});bars.forEach(function(b){b.textContent=on?'running':'barrier ok';b.classList.toggle('on',!on);});}
+    var seq=document.getElementById('seqRow'),par=document.getElementById('parGrid');if(!seq||!par)return;
+    var N=12,T=4,PER=N/T,h='';
+    for(var i=0;i<N;i++)h+='<i class="pbox"></i>';seq.innerHTML=h;
+    h='';for(var r=0;r<T;r++){for(var c=0;c<PER;c++){h+='<i class="pbox" style="grid-column:'+(c+1)+';grid-row:'+(r+1)+'"></i>';}}
+    h+='<i class="psync" id="pSync"></i>';par.innerHTML=h;
+    var sb=seq.querySelectorAll('.pbox'),pb=par.querySelectorAll('.pbox'),sync=document.getElementById('pSync');
+    var seqSlot=document.getElementById('seqSlot'),parSlot=document.getElementById('parSlot');
+    var s=0,pstep=0,ss=0,ps=0;
     function tick(){
-      reg=(reg+1)%5;
-      if(reg===0){tm+=5;clk^=1;iter++;if(clk){qNext=(q+1)&3;}hist.push({clk:clk,q0:q&1,q1:(q>>1)&1});if(hist.length>MAX)hist.shift();workers(true);}
-      if(reg===2){workers(true);}
-      if(reg===3){workers(false);}
-      if(reg===4){if(clk){q=qNext;}hist[hist.length-1].q0=q&1;hist[hist.length-1].q1=(q>>1)&1;}
-      setRegion(reg);tEl.textContent=tm+' ns';iEl.textContent=iter;qEl.textContent=((q>>1)&1)+''+(q&1);
-      draw();
+      if(s===0){sb.forEach(function(b){b.className='pbox';});}
+      sb[s].className='pbox run';if(s>0)sb[s-1].className='pbox done';
+      s++;if(s===N){s=0;ss++;seqSlot.textContent=ss;}
+      if(pstep===0){pb.forEach(function(b){b.className='pbox';});sync.classList.remove('on');}
+      if(pstep<PER){pb.forEach(function(b,k){var col=k%PER;b.className='pbox'+(col===pstep?' run':(col<pstep?' done':''));});}
+      else{pb.forEach(function(b){b.className='pbox done';});sync.classList.add('on');}
+      pstep++;if(pstep===PER+1){pstep=0;ps++;parSlot.textContent=ps;}
     }
-    var timer=null,fig=kc.closest('.hl');
+    var timer=null,fig=seq.closest('.hl');
     function start(){if(timer||reduce)return;timer=setInterval(tick,700);}
     function stop(){if(timer){clearInterval(timer);timer=null;}}
     if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(en){en.isIntersecting?start():stop();});},{threshold:.2}).observe(fig);}else start();
-    setRegion(0);draw();window.addEventListener('resize',draw);
+    if(reduce){sb.forEach(function(b,i){b.className='pbox'+(i<4?' done':i===4?' run':'');});pb.forEach(function(b){b.className='pbox done';});sync.classList.add('on');}
+  })();
+
+  /* ---------- Figure 04: identical processes mapped onto GPU threads ---------- */
+  (function(){
+    var pc=document.getElementById('procCells'),gc=document.getElementById('gpuCells'),pkt=document.getElementById('pkt'),msg=document.getElementById('busMsg');if(!pc||!gc)return;
+    var h='';for(var i=0;i<24*4;i++)h+='<i></i>';pc.innerHTML=h;gc.innerHTML=h;
+    var phase=0;
+    var steps=[
+      function(){pc.className='cells ready';gc.className='cells';pkt.className='pkt';msg.textContent='slot ready';},
+      function(){pkt.className='pkt in';msg.textContent='copy in, once';},
+      function(){pkt.className='pkt hold';gc.className='cells fire';msg.textContent='compute on device';},
+      function(){gc.className='cells';pc.className='cells';},
+      function(){pc.className='cells ready';gc.className='cells fire';msg.textContent='next slot, no copy';},
+      function(){gc.className='cells';pc.className='cells';},
+      function(){pc.className='cells ready';gc.className='cells fire';msg.textContent='next slot, no copy';},
+      function(){gc.className='cells';pkt.className='pkt out';msg.textContent='copy out, once';},
+      function(){pkt.className='pkt';pc.className='cells';msg.textContent='idle';}
+    ];
+    function tick(){steps[phase]();phase=(phase+1)%steps.length;}
+    var timer=null,fig=pc.closest('.hl');
+    function start(){if(timer||reduce)return;timer=setInterval(tick,900);}
+    function stop(){if(timer){clearInterval(timer);timer=null;}}
+    if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(en){en.isIntersecting?start():stop();});},{threshold:.2}).observe(fig);}else start();
+    steps[0]();if(reduce){steps[2]();}
   })();
 })();
 </script>
