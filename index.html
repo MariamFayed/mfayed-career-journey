@@ -175,6 +175,8 @@
   .tl-card li{position:relative;padding-left:18px;font-size:15px}
   .tl-card li::before{content:"";position:absolute;left:2px;top:10px;width:7px;height:7px;border-radius:2px;background:var(--signal)}
   .tl-card li b{color:var(--accent);font-weight:700}
+  .tl-card li a{color:var(--accent);font-weight:700;border-bottom:1px solid color-mix(in srgb,var(--accent) 45%,transparent);transition:color .2s,border-color .2s}
+  .tl-card li a:hover{color:var(--accent-deep);border-color:var(--accent-deep)}
   .tl.key .tl-card{border-color:var(--line-strong);background:linear-gradient(180deg,var(--surface),color-mix(in srgb,var(--surface) 70%,var(--surface-2)));box-shadow:var(--shadow)}
   .tl.key .dot{background:var(--accent)}
   .tl.key .dot svg{stroke:var(--on-accent)}
@@ -441,9 +443,9 @@
           <div class="tl-role">C++ Software Engineer</div>
           <div class="tl-org">Siemens Digital Industries Software, Cairo</div>
           <ul>
-            <li><b>Technical owner of Design Packager</b>, the packaging tool shared by all Siemens verification products. Customer-requested features end to end, from requirements and specs through release, with Application Engineers, Product Engineers and partner R&amp;D teams.</li>
+            <li><b>Technical owner of <a href="#p-dp">Design Packager</a></b>, the packaging tool shared by all Siemens verification products. Customer-requested features end to end, from requirements and specs through release, with Application Engineers, Product Engineers and partner R&amp;D teams.</li>
             <li><b>QuestaSim Graph-based Elaboration (Vopt)</b>: owns the Cross Variant Connectivity area. Delivered features and performance work that cut runtime and memory and improved scaling on complex designs.</li>
-            <li><b>Parallel simulation initiative</b>: multithreaded C++ prototypes that decentralize process execution across threads with minimal sync points, and a <b>GPU-based proof of concept</b> with a large gain over CPU and standard Questa.</li>
+            <li><b>Parallel Simulation Initiative</b>: a <a href="#p-sim">multithreaded C++ simulation kernel</a> that decentralizes process execution across threads with minimal sync points, and a <a href="#p-gpu">GPU-based proof of concept</a> with a large gain over CPU and standard Questa.</li>
             <li>Added <b>ARM platform build support</b>, integrated new tools, mentored interns and junior engineers, wrote documentation used across teams.</li>
           </ul>
           <div class="tags"><span class="tag on">C++</span><span class="tag on">Multithreading</span><span class="tag">CUDA</span><span class="tag">Linux x86-64 · ARM</span><span class="tag">Jenkins</span><span class="tag">Perforce</span></div>
@@ -509,7 +511,7 @@
       <!-- 02 Parallel Simulation Kernel -->
       <article class="hl" id="p-sim">
         <div class="story">
-          <span class="hl-num">Project 02 · QuestaSim parallel simulation initiative</span>
+          <span class="hl-num">Project 02 · QuestaSim Parallel Simulation Initiative</span>
           <span class="badge"><i></i>C++20 coroutines · thread pool · research prototype</span>
           <h3>Parallel Simulation Kernel: a coroutine-based discrete-event simulator</h3>
           <ul class="brief">
@@ -517,6 +519,7 @@
             <li>Questa runs them <b>one after another</b> on a single kernel thread.</li>
             <li>The prototype converts <b>SystemVerilog processes into C++ task functions</b> and runs them <b>in parallel on threads</b>.</li>
             <li><b>One sync</b> before the next slot: correct, deterministic, <b>LRM-compliant</b>.</li>
+            <li>On a real design with 15 threads: <b>5× faster than Questa</b>.</li>
           </ul>
           <div class="tags"><span class="tag on">C++20</span><span class="tag on">Coroutines</span><span class="tag">TBB concurrent_vector</span><span class="tag">Atomics</span></div>
         </div>
@@ -549,13 +552,13 @@
       <!-- 03 GPU prototype -->
       <article class="hl" id="p-gpu">
         <div class="story">
-          <span class="hl-num">Project 03 · QuestaSim parallel simulation initiative</span>
+          <span class="hl-num">Project 03 · QuestaSim Parallel Simulation Initiative</span>
           <span class="badge"><i></i>CUDA · performance prototype</span>
           <h3>GPU-accelerated simulation prototype</h3>
           <ul class="brief">
             <li>One time slot: <b>thousands to millions of processes</b>, same function, different data.</li>
             <li>Every cycle: <b>fresh data host → device</b>, one kernel over all of it <b>in parallel</b>, results back.</li>
-            <li><b>Large gain</b> over the CPU prototype and standard Questa, identical results.</li>
+            <li>Same design: <b>15× faster than the multithreaded kernel</b> and <b>86× faster than Questa</b>, identical results.</li>
           </ul>
           <div class="tags"><span class="tag on">CUDA</span><span class="tag on">C++</span><span class="tag">SIMD</span><span class="tag">Profiling</span></div>
         </div>
