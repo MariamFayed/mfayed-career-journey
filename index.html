@@ -442,7 +442,7 @@
           <div class="tl-org">Siemens Digital Industries Software, Cairo</div>
           <ul>
             <li><b>Technical owner of Design Packager</b>, the packaging tool shared by all Siemens verification products. Customer-requested features end to end, from requirements and specs through release, with Application Engineers, Product Engineers and partner R&amp;D teams.</li>
-            <li><b>QuestaSim Graph-based Elaboration</b>: owns the Cross Variant Connectivity area. Delivered features and performance work that cut runtime and memory and improved scaling on complex designs.</li>
+            <li><b>QuestaSim Graph-based Elaboration (Vopt)</b>: owns the Cross Variant Connectivity area. Delivered features and performance work that cut runtime and memory and improved scaling on complex designs.</li>
             <li><b>Parallel simulation initiative</b>: multithreaded C++ prototypes that decentralize process execution across threads with minimal sync points, and a <b>GPU-based proof of concept</b> with a large gain over CPU and standard Questa.</li>
             <li>Added <b>ARM platform build support</b>, integrated new tools, mentored interns and junior engineers, wrote documentation used across teams.</li>
           </ul>
@@ -471,7 +471,7 @@
           <h3>Design Packager: reproducible packaging of verification runs</h3>
           <ul class="brief">
             <li><b>Contract:</b> each tool hands the packager its <b>command XML files</b>. Nothing else.</li>
-            <li><b>Packager:</b> extract commands → parse commands → parse files, <b>recursively</b> following includes.</li>
+            <li><b>Packager:</b> extract commands → parse commands → parse files, <b>recursively collecting</b> included files.</li>
             <li><b>Output:</b> one <b>design output directory</b> with every collected file, ready to reproduce the run.</li>
           </ul>
           <div class="tags"><span class="tag on">C++</span><span class="tag on">XML interface</span><span class="tag">ARM · x86-64</span></div>
@@ -481,7 +481,7 @@
           <div class="fig-body">
             <svg viewBox="0 0 530 330" aria-hidden="true" id="dpSvg">
               <g class="tool" data-i="0"><rect x="16" y="28" width="112" height="84" rx="8"/><text class="tt" x="72" y="46" text-anchor="middle">Questa</text><text class="tl" x="72" y="62" text-anchor="middle">vlib · vmap · vlog</text><text class="tl" x="72" y="75" text-anchor="middle">… · vsim</text><g class="xml"><rect x="46" y="84" width="52" height="18" rx="9"/><text x="72" y="97" text-anchor="middle">XMLs</text></g></g>
-              <g class="tool" data-i="1"><rect x="16" y="124" width="112" height="84" rx="8"/><text class="tt" x="72" y="142" text-anchor="middle">CDC</text><text class="tl" x="72" y="158" text-anchor="middle">qverify · cdc · rdc</text><text class="tl" x="72" y="171" text-anchor="middle">… · gcdc</text><g class="xml"><rect x="46" y="180" width="52" height="18" rx="9"/><text x="72" y="193" text-anchor="middle">XMLs</text></g></g>
+              <g class="tool" data-i="1"><rect x="16" y="124" width="112" height="84" rx="8"/><text class="tt" x="72" y="142" text-anchor="middle">QFT</text><text class="tl" x="72" y="158" text-anchor="middle">qverify</text><text class="tl" x="72" y="171" text-anchor="middle">formal commands</text><g class="xml"><rect x="46" y="180" width="52" height="18" rx="9"/><text x="72" y="193" text-anchor="middle">XMLs</text></g></g>
               <g class="tool" data-i="2"><rect x="16" y="220" width="112" height="84" rx="8"/><text class="tt" x="72" y="238" text-anchor="middle">Any tool (n)</text><text class="tl" x="72" y="254" text-anchor="middle">its own</text><text class="tl" x="72" y="267" text-anchor="middle">commands</text><g class="xml"><rect x="46" y="276" width="52" height="18" rx="9"/><text x="72" y="289" text-anchor="middle">XMLs</text></g></g>
               <path class="link" data-i="0" d="M128 70 H 164"/>
               <path class="link" data-i="1" d="M128 166 H 164"/>
@@ -495,7 +495,7 @@
               <path class="flow" d="M284 164 V 184"/><text class="lbl" x="292" y="178">files</text>
               <g class="seg" data-s="2"><rect x="206" y="186" width="156" height="34" rx="7"/><text x="284" y="207" text-anchor="middle">3 · files parsing</text></g>
               <path class="flow loop" id="dpLoop" d="M362 212 H 382 V 196 H 362"/>
-              <text class="lbl" x="284" y="240" text-anchor="middle">recursively follows included files</text>
+              <text class="lbl" x="284" y="240" text-anchor="middle">recursively collects included files</text>
               <text class="lbl" x="284" y="300" text-anchor="middle">shared core for every tool</text>
               <path class="link out" id="dpOut" d="M402 166 H 416"/>
               <g class="pkg"><rect x="418" y="134" width="96" height="64" rx="8"/><text x="466" y="154" text-anchor="middle">4 · design</text><text x="466" y="168" text-anchor="middle">output dir</text><text class="lbl" x="466" y="186" text-anchor="middle">collected files</text></g>
