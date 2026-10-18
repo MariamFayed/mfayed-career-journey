@@ -79,6 +79,11 @@
   .sec-head h2{font-size:clamp(30px,4.4vw,46px);font-weight:700;line-height:1.08;margin:10px 0 14px}
   .sec-head p{color:var(--muted);font-size:17px;max-width:60ch}
 
+  /* glossary */
+  .glossary{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px;margin-top:clamp(28px,4vw,44px);padding-top:16px;border-top:1px dashed var(--line-strong);font-family:var(--f-mono);font-size:12px;color:var(--muted);line-height:1.5}
+  .glossary .glab{letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-size:11px}
+  .glossary div{display:flex;gap:8px;min-width:0}
+  .glossary b{color:var(--ink);font-weight:500;white-space:nowrap}
   /* generic reveal */
   .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
   .reveal.in{opacity:1;transform:none}
@@ -452,6 +457,7 @@
         </div>
       </div>
     </div>
+    <div class="glossary" aria-label="Terms used in this section"><span class="glab">Terms</span><div><b>Vopt</b><span>the optimize phase of QuestaSim</span></div></div>
   </div>
 </section>
 
@@ -586,6 +592,7 @@
       </article>
 
     </div>
+    <div class="glossary" aria-label="Terms used in this section"><span class="glab">Terms</span><div><b>LRM</b><span>language reference manual, the SystemVerilog standard</span></div><div><b>SystemVerilog</b><span>hardware description language used to write and verify chip designs</span></div></div>
   </div>
 </section>
 
@@ -622,6 +629,7 @@
         <div class="tags"><span class="tag">LLMs</span><span class="tag">AI agents</span><span class="tag">Generative AI tools</span></div>
       </div>
     </div>
+    <div class="glossary" aria-label="Terms used in this section"><span class="glab">Terms</span><div><b>SystemVerilog / VHDL</b><span>hardware description languages used to write chip designs</span></div></div>
   </div>
 </section>
 
